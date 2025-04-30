@@ -152,3 +152,154 @@ This project is licensed under the MIT License - feel free to use it, modify it,
 
 # 🔥 If you liked it, don't forget to ⭐ star the repo!
 
+
+
+# 🛡️ Server Security Audit and Hardening Script
+
+A complete **Bash script** that performs **security auditing** and applies essential **server hardening** steps.  
+Generates a detailed **audit report** automatically after execution.
+
+---
+
+## 📋 Features
+
+- 🔎 User & Group auditing (find users with UID 0, users without passwords)
+- 🔒 File & Directory permission checks (world-writable files, `.rhosts` detection)
+- ⚙️ Service audit (status of critical services like SSHD, IPTABLES)
+- 🌐 Network security checks (open ports, active firewalls, IP configuration)
+- 🚀 System update checks (APT/YUM pending updates)
+- 🛑 SSH Hardening (disable password authentication)
+- 🚫 Disable IPv6
+- 🔐 Bootloader (GRUB) security suggestions
+- 🔄 Configure automatic security updates
+- 📝 Generates a complete timestamped `audit_report.txt`
+
+---
+
+## 📂 File Structure
+
+| File                | Purpose                                |
+|---------------------|----------------------------------------|
+| `security_audit.sh` | Main security audit and hardening script |
+| `README.md`         | Project documentation                  |
+
+---
+
+## 📦 Requirements
+
+- Bash Shell
+- Linux (Debian/Ubuntu, RHEL/CentOS, etc.)
+- `ss`, `ip`, `curl`, `systemctl`, `apt` or `yum`
+- Sudo privileges
+
+---
+
+## 🚀 How to Use
+
+1. **Clone the Repository**:
+
+```bash
+git clone <your-repo-url>
+cd <project-directory>
+```
+
+2. **Make Script Executable**:
+
+```bash
+chmod +x security_audit.sh
+```
+
+3. **Run the Script as Root**:
+
+```bash
+sudo ./security_audit.sh
+```
+
+4. **Audit Report** will be generated with a timestamp:
+
+```bash
+audit_report_YYYYMMDD_HHMMSS.txt
+```
+
+---
+
+## ⚙️ What Happens Inside
+
+- Logs are captured in a dynamically created report file.
+- **Important system hardening steps** like SSH PasswordAuthentication disabling are applied automatically.
+- IPv6 is disabled via `sysctl`.
+- Services are checked and suggestions are provided if necessary.
+- Public IP is fetched using `curl`.
+
+---
+
+## ✨ Example Audit Output
+
+```
+--- User and Group Audit ---
+root:x:0:0:root:/root:/bin/bash
+...
+Users with UID 0 other than root:
+(none)
+
+--- File and Directory Permissions ---
+World-writable files:
+...
+
+--- Services Audit ---
+sshd.service - OpenSSH Daemon running
+iptables.service - Running
+...
+
+--- Firewall and Network Security ---
+Firewall: active (ufw)
+
+Open Ports:
+LISTEN 0 128 *:22 *:*
+LISTEN 0 100 127.0.0.1:3306
+...
+
+--- IP and Network Configurations ---
+eth0: 192.168.1.10/24
+Public IP: 102.45.123.22
+
+--- Security Updates ---
+12 packages can be updated.
+...
+```
+
+---
+
+## ⚠️ Important Notes
+
+- **Backup `/etc/ssh/sshd_config`** before applying SSH hardening.
+- Bootloader (GRUB) security needs manual password setting.
+- Always verify after hardening steps to avoid locking yourself out!
+
+---
+
+## 📢 Future Improvements
+
+- Email Audit Report to Admin
+- Slack or Telegram Notification on critical findings
+- Automatic Remediation for Common Vulnerabilities
+- Dockerize the Audit Process
+
+---
+
+## 👨‍💻 Author
+
+**Tarun Shori**  
+DevOps & Security Enthusiast | Automation Explorer 🚀
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⚡ If you found it helpful, star it 🌟 and fork it 🍴!
+
+
